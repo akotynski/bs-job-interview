@@ -33,4 +33,12 @@ public class StooqData {
     public int hashCode() {
         return Objects.hash(name, value);
     }
+
+    @Override
+    public String toString() {
+        return "StooqData{" +
+                "name='" + name + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }

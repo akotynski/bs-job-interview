@@ -25,11 +25,14 @@ repositories {
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb'
-    compile group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo'
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
+    compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.0.8'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310'
     compile group: 'net.sourceforge.htmlcleaner', name: 'htmlcleaner', version: '2.19'
 
+    compile group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo'
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'

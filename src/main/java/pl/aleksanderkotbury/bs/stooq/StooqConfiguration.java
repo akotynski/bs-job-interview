@@ -9,12 +9,19 @@ import java.net.URL;
 public class StooqConfiguration {
 
     private final URL stooqUrl;
+    private final Long updateSecondsInterval;
 
-    public StooqConfiguration(@Value("${stooq.url}") URL stooqUrl) {
+    public StooqConfiguration(@Value("${stooq.url}") URL stooqUrl,
+                              @Value("${stooq.updateSecondsInterval}") Long updateSecondsInterval) {
         this.stooqUrl = stooqUrl;
+        this.updateSecondsInterval = updateSecondsInterval;
     }
 
     public URL getStooqUrl() {
         return stooqUrl;
+    }
+
+    public Long getUpdateSecondsInterval() {
+        return updateSecondsInterval;
     }
 }
