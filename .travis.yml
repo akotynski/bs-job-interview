@@ -1,4 +1,5 @@
 language: java
+before_script: chmod +x gradlew
 script: ./gradlew clean build
 jdk:
 - oraclejdk8
