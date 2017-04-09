@@ -17,3 +17,10 @@
     font-size: 16px;
     font-weight: bold;
 }
+
+.stooq-error {
+    font-size: 26px;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}

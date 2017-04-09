@@ -96,4 +96,23 @@ public class StooqDataUpdateSchedulerTest {
         verify(stooqRepository).save(Collections.singletonList(secondStooqMongoDto));
         verify(stooqClient, times(2)).getStooqData();
     }
+
+    @Test
+    public void shouldContinueFetchingData_whenErrorOccurred() {
+        // given
+        TestScheduler testScheduler = new TestScheduler();
+        when(schedulers.computation()).thenReturn(testScheduler);
+
+        when(stooqClient.getStooqData())
+                .thenThrow(new RuntimeException("force error!"))
+                .thenReturn(Collections.singletonList(firstStooqData));
+
+        // when
+        testObj.onInit();
+        testScheduler.advanceTimeBy(60L, TimeUnit.SECONDS);
+
+        // then
+        verify(stooqRepository).save(Collections.singletonList(firstStooqMongoDto));
+        verify(stooqClient, times(2)).getStooqData();
+    }
 }

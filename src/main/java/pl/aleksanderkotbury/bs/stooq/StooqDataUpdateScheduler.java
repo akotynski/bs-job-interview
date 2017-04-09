@@ -40,9 +40,19 @@ public class StooqDataUpdateScheduler {
                 .distinctUntilChanged()
                 .map(stooqDataToMongoDtoMapper::mapToMongoDto)
                 .map(stooqRepository::save)
+                .doOnError(this::logError)
+                .retryWhen(error -> retryOnError(updateSecondsInterval, error))
                 .subscribe(
                         savedEntities -> logger.info("Stooq entities has been updated {}", savedEntities),
-                        throwable -> logger.error("Something went wrong during entities update", throwable)
+                        this::logError
                 );
+    }
+
+    private void logError(Throwable throwable) {
+        logger.error("Something went wrong during entities update", throwable);
+    }
+
+    private Flowable<Long> retryOnError(Long updateSecondsInterval, Flowable<Throwable> error) {
+        return error.flatMap(t -> Flowable.timer(updateSecondsInterval, TimeUnit.SECONDS, schedulers.computation()));
     }
 }
